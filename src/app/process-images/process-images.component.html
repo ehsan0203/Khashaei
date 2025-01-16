@@ -1,0 +1,53 @@
+<div class="container py-5">
+  <div class="upload-container bg-light p-4 rounded shadow">
+    <h2 class="text-center mb-4">آپلود و پردازش عکس خاشعی</h2>
+
+    <form (submit)="processImages(); $event.preventDefault()">
+      <div class="mb-3">
+        <label for="productImages" class="form-label"
+          >انتخاب عکس های مورد نظر:</label
+        >
+        <input
+          type="file"
+          id="productImages"
+          class="form-control"
+          (change)="onProductImagesChange($event)"
+          multiple
+          accept="image/*"
+        />
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-block">
+          پردازش عکس
+        </button>
+      </div>
+    </form>
+
+    <div *ngIf="processedImages.length > 0" class="mt-5">
+      <div class="row g-3">
+        <div
+          class="col-12"
+          *ngFor="let image of processedImages; let i = index"
+        >
+          <div class="card">
+            <img
+              [src]="image.data"
+              class="card-img-top mx-auto d-block"
+              alt="Processed Image"
+              style="width: 150px; height: auto; object-fit: cover"
+            />
+            <div class="card-body text-center">
+              <button
+                class="btn btn-success btn-block"
+                (click)="downloadImage(image.data, image.name)"
+              >
+                دانلود
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
